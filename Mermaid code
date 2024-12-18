@@ -1,0 +1,33 @@
+
+graph TD
+
+%% Entities
+U(User) -->|Registers/Login| RL[Registration & Login]
+Ar(Artist) -->|Registers/Login| RL
+A(Admin) -->|Approves/Rejects Events| EAR[Event Approval & Rejection]
+
+%% User Flows
+RL -->|Confirmation| U
+U -->|Browse Services| SD[Service Discovery]
+SD -->|Service Info| U
+U -->|Book Service| BP[Booking & Payments]
+BP -->|Booking Confirmation| U
+U -->|Send Message| NM[Notifications & Messages]
+NM -->|Receive Notification| U
+U -->|Submit Review| RR[Review & Rating]
+
+%% Artist Flows
+RL -->|Confirmation| Ar
+Ar -->|Manage Services| SM[Service Management]
+SM -->|Service Updates| Ar
+Ar -->|Create Event/Exhibition| EM[Event & Exhibition Management]
+EM -->|Submit for Approval| EAR
+EAR -->|Approval/Rejection Notification| Ar
+Ar -->|Send Message| NM
+NM -->|Receive Notification| Ar
+RR -->|View Reviews/Feedback| Ar
+
+%% Admin Flows
+EAR -->|Approval Logs| A
+A -->|Monitor Reviews| RR
+RR -->|Remove Artists (If Feedback is Bad)| A
